@@ -117,7 +117,24 @@ class NordicDfu {
 
     final handlerMapKey = _getHandlerMapKey(address);
 
-    final handler = _eventHandlerMap[handlerMapKey];
+    DfuEventHandler? handler = _eventHandlerMap[handlerMapKey];
+
+    // [FORK] 当 Buttonless DFU 改变了设备 BLE 地址时，事件携带的新
+    // 地址可能匹配不到注册过的 handler。回退使用最近注册的 handler 以
+    // 保证事件不会静默丢失，与 v6.x 的闭包式派发行为保持一致。
+    //
+    // 上游 issue: #222, #260, #263
+    if (handler == null && _eventHandlerMap.isNotEmpty) {
+      handler = _eventHandlerMap.values.last;
+      if (_eventHandlerMap.length > 1) {
+        debugPrint(
+          '[nordic_dfu] Event "$key" from unknown address "$address" '
+          'dispatched to most recently registered handler. '
+          'Device address may have changed during Buttonless DFU.',
+        );
+      }
+    }
+
     handler?.dispatchEvent(key, values, handlerMapKey);
   }
 
