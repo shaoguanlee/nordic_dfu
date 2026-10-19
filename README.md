@@ -4,6 +4,17 @@
 [![mobile_scanner](https://github.com/juliansteenbakker/nordic_dfu/actions/workflows/flutter_format.yml/badge.svg)](https://github.com/juliansteenbakker/nordic_dfu/actions/workflows/flutter_format.yml)
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/juliansteenbakker)](https://github.com/sponsors/juliansteenbakker)
 
+> ## ⚠️ This fork is deprecated / 本 fork 已废弃（2026-10-19）
+>
+> The upstream package has fixed the Buttonless DFU address issue in **7.2.0**
+> (PR [#283](https://github.com/juliansteenbakker/nordic_dfu/pull/283), merged 2026-08-17),
+> and handles built-in Kotlin in its own `build.gradle.kts`.
+> **Please use the official package — `nordic_dfu: ^8.1.0` — instead of this fork.**
+>
+> 上游已在 **7.2.0** 修复 Buttonless DFU 回调地址问题（PR #283，2026-08-17 合并），
+> 并自行适配 Flutter built-in Kotlin。**请直接使用官方包 `nordic_dfu: ^8.1.0`**。
+> 本 fork 仅作留档，不再维护。
+
 Fork from [flutter_nordic_dfu](https://pub.dev/packages/flutter_nordic_dfu) and updated with latest dependencies, now with macOS support from version 6.0.0.
 
 This library allows you to do a Device Firmware Update (DFU) of your nrf51 or
